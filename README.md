@@ -1,2 +1,2 @@
 # Spec
-Spec is a platform that makes finding a job much easier to people on the spectrum
+Spec is a platform that helps people on the spectrum to find a job that fits their needs and wants.
