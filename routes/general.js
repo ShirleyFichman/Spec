@@ -8,4 +8,6 @@ const router = express.Router();
 
 //all the routes will be added here
 
+router.use('/', generalController.getHome);
+
 module.exports = router;
