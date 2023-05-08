@@ -8,7 +8,7 @@
 
 You should install the following programs before proceeding:
 
-- #### NodeJs and npm
+- #### Node.Js and npm
     > Node. js is an open-source, cross-platform JavaScript runtime environment and library for running web applications outside the client's browser. 
     npm stands for Node Package Manager. It's a library and registry for JavaScript software packages, which are used throghout the project.
 
