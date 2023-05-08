@@ -4,3 +4,11 @@ exports.getHome = (req, res, next) => {
       path: '/',
     });
   };
+
+  //should render jobs page
+  exports.getJobs = (req, res, next) => {
+    res.render('general/home', {
+      pageTitle: 'Jobs Page',
+      path: '/jobs',
+    });
+  };
