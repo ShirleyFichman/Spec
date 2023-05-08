@@ -19,7 +19,7 @@ You should install the following programs before proceeding:
     Sequelize lets us connect to a database and perform operations without writing raw SQL queries.
 
     [Download MySQL Here!](https://dev.mysql.com/downloads/mysql/)
-    To install Sequlize:
+    >To install Sequlize:
     `npm install sequlize`
 
 - #### Git (*Advised For Downloading This Project*)
