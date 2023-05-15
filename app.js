@@ -1,3 +1,8 @@
+//TODO add a profile model when ready and create relations to user
+//TODO add app.use(employerRoutes); when employer controllers added
+//TODO delet dummy user when adding authentication
+//TODO adding try catch blocks to handle errors
+
 const path = require('path');
 const express= require('express');
 const bodyParser = require('body-parser');
@@ -7,14 +12,13 @@ const sequelize = require('./util/database');
 const User= require('./models/user');
 const Position= require('./models/position');
 const Employer= require('./models/employer');
-//const Profile= require('./models/profile');
 
 const app= express();
 
 app.set('view engine', 'ejs');
 app.set('views', 'views');
 
-//const employerRoutes = require('./routes/employer');
+const employerRoutes = require('./routes/employer');
 const userRoutes = require('./routes/user');
 const generalRoutes = require('./routes/general');
 const errorController = require('./controllers/error');
@@ -34,17 +38,11 @@ app.use((req, res, next) =>{
 });
 
 app.use('/user', userRoutes);
+app.use('/employer', employerRoutes);
 app.use(generalRoutes);
-//app.use(employerRoutes);
-
 app.use(errorController.get404);
 
-//User.hasOne(Profile);
-//Profile.belongsTo(User);
 Position.belongsTo(Employer, {constraints: true, onDelete: 'CASCADE'});
-
-//delete the {force: true} when in production
-//remember to delete dummy user
 
 sequelize.sync().then(result => {
     return User.findByPk(1);
