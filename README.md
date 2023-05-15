@@ -6,7 +6,7 @@
 
 ### Prerequisites
 
-You should install the following programs before proceeding:
+Please install the following programs before proceeding:
 
 - #### Node. Js and npm
     > Node. js is an open-source, cross-platform JavaScript runtime environment and library for running web applications outside the client's browser. 
