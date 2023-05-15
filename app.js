@@ -1,7 +1,6 @@
 //TODO add a profile model when ready and create relations to user
 //TODO add app.use(employerRoutes); when employer controllers added
 //TODO delet dummy user when adding authentication
-//TODO adding try catch blocks to handle errors
 
 const path = require('path');
 const express= require('express');
