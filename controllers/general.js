@@ -5,7 +5,6 @@ exports.getHome = (req, res, next) => {
     });
   };
 
-  //should render jobs page
   exports.getJobs = (req, res, next) => {
     res.render('general/home', {
       pageTitle: 'Jobs Page',

@@ -1,6 +1,6 @@
-const Sequelize= require('sequelize'); // the package
+const Sequelize= require('sequelize'); 
 
-const sequelize= require('../util/database'); // have the connection pool
+const sequelize= require('../util/database'); 
 
 const Employer = sequelize.define('employer', {
     id: {

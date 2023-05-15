@@ -18,6 +18,3 @@ exports.getProfile = (req, res, next) => {
       path: '/profile',
     });
   };
-
-
-// I need a user model in order to address the user itself and forward his id in the routes

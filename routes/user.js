@@ -1,15 +1,12 @@
 const path = require('path');
-
 const express = require('express');
 
 const userController = require('../controllers/user');
 
 const router = express.Router();
 
-router.use('/jobs', userController.getJobs); // needs to be forwarded to the jobs page with that user signed in
-
-router.use('/profile', userController.getProfile); // needs to be forwarded to the user's profile
-
-router.use('/', userController.getHome); // needs to be forwarded to the home page with that user signed in
+router.use('/jobs', userController.getJobs); 
+router.use('/profile', userController.getProfile); 
+router.use('/', userController.getHome); 
 
 module.exports = router;
