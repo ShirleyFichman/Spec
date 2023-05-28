@@ -1,16 +1,17 @@
 //TODO add a profile model when ready and create relations to user
-//TODO add app.use(employerRoutes); when employer controllers added
 //TODO delet dummy user when adding authentication
 
 const path = require('path');
 const express= require('express');
 const bodyParser = require('body-parser');
+const helmet= require('helmet')
 
 const sequelize = require('./util/database');
 
 const User= require('./models/user');
 const Position= require('./models/position');
 const Employer= require('./models/employer');
+const Profile= require('./models/profile');
 
 const app= express();
 
@@ -21,6 +22,8 @@ const employerRoutes = require('./routes/employer');
 const userRoutes = require('./routes/user');
 const generalRoutes = require('./routes/general');
 const errorController = require('./controllers/error');
+
+app.use(helmet());
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, 'public'))); 
@@ -42,6 +45,7 @@ app.use(generalRoutes);
 app.use(errorController.get404);
 
 Position.belongsTo(Employer, {constraints: true, onDelete: 'CASCADE'});
+Profile.belongsTo(User, { foreignKey: 'userId' });
 
 sequelize.sync().then(result => {
     return User.findByPk(1);
@@ -53,7 +57,7 @@ sequelize.sync().then(result => {
     return user;
 })
 .then(user =>{
-    app.listen(3000);
+    app.listen(process.env.PORT || 3000);
 })
 .catch(err =>{
     console.log(err);
