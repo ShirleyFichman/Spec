@@ -1,7 +1,6 @@
 //TODO adding CV with multer
 
 const Sequelize= require('sequelize'); 
-
 const sequelize= require('../util/database'); 
 
 const Profile = sequelize.define('profile', {

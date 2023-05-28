@@ -1,6 +1,13 @@
 {
   "dependencies": {
-    "express": "^4.18.2"
+    "body-parser": "^1.20.2",
+    "compression": "^1.7.4",
+    "ejs": "^3.1.9",
+    "express": "^4.18.2",
+    "helmet": "^7.0.0",
+    "mysql2": "^3.3.0",
+    "query-string": "^8.1.0",
+    "sequelize": "^6.31.1"
   },
   "devDependencies": {
     "nodemon": "^2.0.22"
@@ -9,6 +16,9 @@
   "description": "Spec is a platform that makes finding a job much easier to people on the spectrum",
   "version": "1.0.0",
   "main": "app.js",
+  "engines": {
+    "node": "19.8.1"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "nodemon app.js"

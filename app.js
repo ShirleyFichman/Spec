@@ -5,6 +5,7 @@ const path = require('path');
 const express= require('express');
 const bodyParser = require('body-parser');
 const helmet= require('helmet')
+const compression= require('compression')
 
 const sequelize = require('./util/database');
 
@@ -24,6 +25,7 @@ const generalRoutes = require('./routes/general');
 const errorController = require('./controllers/error');
 
 app.use(helmet());
+app.use(compression());
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, 'public'))); 

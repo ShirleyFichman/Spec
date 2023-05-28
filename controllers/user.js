@@ -19,5 +19,7 @@ exports.getProfile = (req, res, next) => {
       pageTitle: 'Profile Page',
       path: '/profile',
       userId: req.user.id,
+      editing: false
     });
   };
+  

@@ -6,7 +6,7 @@ exports.getHome = (req, res, next) => {
   };
 
   exports.getJobs = (req, res, next) => {
-    res.render('general/Jobs', {
+    res.render('general/jobs', {
       pageTitle: 'Jobs Page',
       path: '/jobs',
     });
