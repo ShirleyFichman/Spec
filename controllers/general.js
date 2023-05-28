@@ -11,3 +11,4 @@ exports.getHome = (req, res, next) => {
       path: '/jobs',
     });
   };
+  

@@ -1,5 +1,4 @@
 const Sequelize= require('sequelize'); 
-
 const sequelize= require('../util/database'); 
 
 const Employer = sequelize.define('employer', {
@@ -9,7 +8,7 @@ const Employer = sequelize.define('employer', {
         allowNull: false,
         primaryKey: true
     },
-    company_name: {
+    companyName: {
         type: Sequelize.STRING,
         allowNull: false
     },
