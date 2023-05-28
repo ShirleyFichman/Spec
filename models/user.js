@@ -1,4 +1,5 @@
 //TODO email should be checked that is email + auth will be added
+//foreign key- profileId
 
 const Sequelize= require('sequelize'); 
 
