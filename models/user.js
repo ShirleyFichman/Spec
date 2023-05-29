@@ -1,5 +1,4 @@
 //TODO email should be checked that is email + auth will be added
-//foreign key- profileId
 
 const Sequelize= require('sequelize'); 
 const sequelize= require('../util/database'); 
@@ -15,7 +14,7 @@ const User = sequelize.define('user', {
         type: Sequelize.STRING,
         allowNull: false
     },
-    password: {
+    name: {
         type: Sequelize.STRING,
         allowNull: false
     }
