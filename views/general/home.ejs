@@ -1,0 +1,39 @@
+<%- include('../includes/head.ejs') %>
+</head>
+<body>
+    <div class="backdrop"></div>
+    <header class="main-header">
+        <button id="side-menu-toggle">Menu</button>
+        <nav class="main-header__nav">
+            <ul class="main-header__item-list">
+                <li class="main-header__item">
+                    <a class="<%= path === '/' ? 'active' : '' %>" href="/home">Home</a>
+                </li>
+                <li class="main-header__item">
+                    <a class="<%= path === '/jobs' ? 'active' : '' %>" href="/jobs">Jobs</a>
+                </li>
+                <li class="main-header__item">
+                    <a class="<%= path === '/profile' ? 'active' : '' %>" href="/auth/google">Login</a>
+                </li>
+            </ul>
+        </nav>
+    </header>
+    
+    <nav class="mobile-nav">
+            <ul class="mobile-nav__item-list">
+                    <li class="mobile-nav__item">
+                        <a class="<%= path === '/' ? 'active' : '' %>" href="/home">Home</a>
+                    </li>
+                    <li class="mobile-nav__item">
+                        <a class="<%= path === '/jobs' ? 'active' : '' %>" href="/jobs">Jobs</a>
+                    </li>
+                    <li class="mobile-nav__item">
+                        <a class="<%= path === '/profile' ? 'active' : '' %>" href="/auth/google">Login</a>
+                </ul>
+    </nav>
+
+    <main>
+        <h1>Home Page</h1>
+
+    </main>
+<%- include('../includes/end.ejs') %>

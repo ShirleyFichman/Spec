@@ -1,8 +1,9 @@
 exports.getHome = (req, res, next) => {
+  const userId = req.params.userId;
     res.render('user/home', {
       pageTitle: 'Home Page',
       path: '/',
-      userId: req.user.id,
+      userId: userId,
     });
   };
 
