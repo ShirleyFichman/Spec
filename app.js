@@ -41,20 +41,9 @@ app.use('/employer', employerRoutes);
 Position.belongsTo(Employer, {constraints: true, onDelete: 'CASCADE'});
 Profile.belongsTo(User, { foreignKey: 'userId' });
 
-sequelize.sync({ force: true }).then(result => {
-    return User.findByPk(1);
-})
-.then(user => {
-    if (!user) {
-        return User.create({email: 'test@test.com', name: 'test'});
-    }
-    return user;
-})
-.then(user =>{
+//{ force: true }
+sequelize.sync().then(result => {
     app.listen(process.env.PORT || 3000);
-})
-.catch(err =>{
-    console.log(err);
 });
 
 app.use(session({
@@ -104,7 +93,11 @@ app.get('/auth/google',
 app.get('/auth/google/callback', 
   passport.authenticate('google', { failureRedirect: '/error' }),
   function(req, res) {
-    res.redirect('/success');
+    User.findOrCreate({
+      where: { email: userProfile.emails[0]['value']},
+      defaults: {name: userProfile.displayName}
+      });
+    res.redirect('/');
   });
 
   app.get('/error', (req, res) => res.send("error logging in"));
