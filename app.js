@@ -1,6 +1,4 @@
-//TODO add a profile model when ready and create relations to user
-//TODO move success to general routes
-//TODO add user from google auth to db
+//TODO make the home page home with nav to login
 
 const path = require('path');
 const express= require('express');
@@ -33,6 +31,15 @@ app.use(compression());
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, 'public'))); 
+
+app.use((req, res, next) => {
+  User.findByPk(1)
+    .then(user => {
+      req.user = user;
+      next();
+    })
+    .catch(err => console.log(err));
+});
 
 app.use('/user', userRoutes);
 app.use('/employer', employerRoutes);
@@ -87,6 +94,7 @@ passport.use(new GoogleStrategy({
   }
 ));
  
+
 app.get('/auth/google', 
   passport.authenticate('google', { scope : ['profile', 'email'] }));
  
@@ -96,8 +104,11 @@ app.get('/auth/google/callback',
     User.findOrCreate({
       where: { email: userProfile.emails[0]['value']},
       defaults: {name: userProfile.displayName}
-      });
-    res.redirect('/');
+      }).then(user => {
+        userId=user[0]['dataValues']['id'];
+        req.userId = userId;
+        res.redirect('/user/'+userId);
+      }).catch(err => console.log(err));
   });
 
   app.get('/error', (req, res) => res.send("error logging in"));

@@ -7,6 +7,6 @@ const router = express.Router();
 
 router.use('/jobs', userController.getJobs); 
 router.use('/profile', userController.getProfile); 
-router.use('/', userController.getHome); 
+router.use('/:userId', userController.getHome); 
 
 module.exports = router;
