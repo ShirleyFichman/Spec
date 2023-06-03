@@ -103,9 +103,11 @@ app.get('/auth/google/callback',
       where: { email: userProfile.emails[0]['value']},
       defaults: {name: userProfile.displayName}
       }).then(user => {
+        created= user[1]
         let userId=user[0]['dataValues']['id'];
-        console.log(Number. isInteger(userId));
-        user[0].createProfile({userId: userId, fullName: userProfile.displayName});
+        if(created){
+          user[0].createProfile({userId: userId, fullName: userProfile.displayName});
+        }
         res.redirect('/user/'+userId);
       }).catch(err => console.log(err));
   });
