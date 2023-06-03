@@ -16,7 +16,7 @@ const Profile = sequelize.define('profile', {
     },
     imageUrl:{
         type: Sequelize.STRING,
-        allowNull: false
+        allowNull: true
     },
     intro:{
         type: Sequelize.TEXT,
