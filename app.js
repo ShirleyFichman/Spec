@@ -15,6 +15,7 @@ const User= require('./models/user');
 const Position= require('./models/position');
 const Employer= require('./models/employer');
 const Profile= require('./models/profile');
+const User_Profile= require('./models/user_profile');
 
 const app= express();
 
@@ -32,21 +33,19 @@ app.use(compression());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, 'public'))); 
 
-app.use((req, res, next) => {
-  User.findByPk(1)
-    .then(user => {
-      req.user = user;
-      next();
-    })
-    .catch(err => console.log(err));
-});
-
 app.use('/user', userRoutes);
 app.use('/employer', employerRoutes);
+//routes for auth
+//routes for general
 
-  
 Position.belongsTo(Employer, {constraints: true, onDelete: 'CASCADE'});
-Profile.belongsTo(User, { foreignKey: 'userId' });
+User.hasOne(Profile, { through: User_Profile });
+Profile.belongsTo(User, { through: User_Profile, 
+  foreignKey: 'userId',
+  constraints: true,
+  onDelete: 'CASCADE',
+  onUpdate: 'CASCADE' });
+  
 
 //{ force: true }
 sequelize.sync().then(result => {
@@ -94,7 +93,6 @@ passport.use(new GoogleStrategy({
   }
 ));
  
-
 app.get('/auth/google', 
   passport.authenticate('google', { scope : ['profile', 'email'] }));
  
@@ -105,12 +103,11 @@ app.get('/auth/google/callback',
       where: { email: userProfile.emails[0]['value']},
       defaults: {name: userProfile.displayName}
       }).then(user => {
-        userId=user[0]['dataValues']['id'];
-        req.userId = userId;
+        let userId=user[0]['dataValues']['id'];
+        console.log(Number. isInteger(userId));
+        user[0].createProfile({userId: userId, fullName: userProfile.displayName});
         res.redirect('/user/'+userId);
       }).catch(err => console.log(err));
   });
-
-  app.get('/error', (req, res) => res.send("error logging in"));
   app.use(generalRoutes);
   app.use(errorRoutes);

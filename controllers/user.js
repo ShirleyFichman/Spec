@@ -11,7 +11,7 @@ exports.getJobs = (req, res, next) => {
     res.render('user/jobs', {
       pageTitle: 'Jobs Page',
       path: '/jobs',
-      userId: req.user.id,
+      userId: req.userId,
     });
   };
 
