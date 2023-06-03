@@ -16,10 +16,13 @@ exports.getJobs = (req, res, next) => {
   };
 
 exports.getProfile = (req, res, next) => {
+  const userId = req.params.userId;
+  const profile= Profile.findByPk(userId);
     res.render('user/profile', {
       pageTitle: 'Profile Page',
       path: '/profile',
-      userId: req.user.id,
+      userId: userId,
+      profile: profile,
       editing: false
     });
   };
