@@ -4,6 +4,15 @@
    <%- include('../includes/navigation.ejs') %>
 
     <main>
-        <h1>Profile of user id: <%- userId %></h1>
+        <div class="card__image">
+            <img src="<%= profile.imageUrl %>" alt="profile_picture">
+        </div>
+        <form action="/user/get-edit-profile/<%= profile.id %>" method="POST">
+            <button type="submit" class="btn">Edit Profile</button>
+        </form>
+        <h1>profile  id: <%- profile.id %></h1>
+        <h1>profile  full name: <%- profile.fullName %></h1>
+        <h1>profile  location: <%- profile.location %></h1>
+        <h1>profile  intro: <%- profile.intro %></h1>
     </main>
 <%- include('../includes/end.ejs') %>

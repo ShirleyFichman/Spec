@@ -6,7 +6,9 @@ const userController = require('../controllers/user');
 const router = express.Router();
 
 router.use('/jobs', userController.getJobs); 
-router.use('/profile', userController.getProfile); 
-router.use('/:userId', userController.getHome); 
+router.get('/get-edit-profile/:userId', userController.getEditProfile);
+router.post('/post-edit-profile/:userId', userController.postEditProfile);
+router.use('/profile/:userId', userController.getProfile); 
+router.get('/:userId', userController.getHome); 
 
 module.exports = router;
