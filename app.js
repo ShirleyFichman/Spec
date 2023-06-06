@@ -1,5 +1,3 @@
-//TODO make the home page home with nav to login
-
 const path = require('path');
 const express= require('express');
 const bodyParser = require('body-parser');
