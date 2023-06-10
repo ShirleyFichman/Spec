@@ -102,6 +102,6 @@ app.get('/auth/google/callback',
   app.use(errorRoutes);
 
 //{ force: true }
-sequelize.sync().then(result => {
+sequelize.sync({ force: true }).then(result => {
   app.listen(process.env.PORT || 3000);
 });
