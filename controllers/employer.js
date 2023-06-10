@@ -39,20 +39,16 @@ exports.postJob = (req, res, next) => {
   };
   
 exports.getJobs = (req, res, next) => {
-    res.render('employer/home', {
-      pageTitle: 'Jobs Page',
-      path: '/jobs',
-    });
-    /*
     const employerId = 1;
-    Job.findAll({where:{employerId: employerId}}).then(jobs =>{
+    Job.findAll({where:{employerId: employerId}})
+    .then(jobs =>{
       res.render('employer/jobs', {
         pageTitle: 'Jobs Page',
         path: '/jobs',
+        employerId: employerId,
         jobs: jobs
       });
     })
     .catch(err => console.log(err));
-    */
   };
   
