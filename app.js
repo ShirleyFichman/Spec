@@ -103,5 +103,6 @@ app.get('/auth/google/callback',
 
 //{ force: true }
 sequelize.sync().then(result => {
+  //Employer.create({ companyName: 'Test', email: 'test@test.com', password: 'test' });
   app.listen(process.env.PORT || 3000);
 });
