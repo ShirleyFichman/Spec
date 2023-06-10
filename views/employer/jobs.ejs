@@ -1,0 +1,19 @@
+<%- include('../includes/head.ejs') %>
+</head>
+
+<body>
+   <%- include('../includes/navigation.ejs') %>
+
+    <main>
+        <h1>Jobs page for <%- employerId %></h1>
+        <ul class="jobs">
+            <% for (var i = 0; i < jobs.length; i++) { %>
+            <li class="job-listed">
+                <div class="job-title">
+                    <span class="title" style="text-align:left"><%= jobs[i].title %></span>
+                </div>
+            </li>
+            <% } %>
+        </ul>
+    </main>
+<%- include('../includes/end.ejs') %>
