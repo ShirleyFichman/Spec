@@ -12,12 +12,12 @@ require('dotenv').config({ path: './var.env' });
 const sequelize = require('./util/database');
 
 const User= require('./models/user');
-const Position= require('./models/position');
+const Job= require('./models/job');
 const Employer= require('./models/employer');
 const Profile= require('./models/profile');
 const User_Profile= require('./models/user_profile');
 
-Position.belongsTo(Employer, {constraints: true, onDelete: 'CASCADE'});
+Job.belongsTo(Employer, {constraints: true, onDelete: 'CASCADE'});
 User.hasOne(Profile, { through: User_Profile });
 Profile.belongsTo(User, { through: User_Profile, 
   foreignKey: 'userId',
@@ -102,6 +102,7 @@ app.get('/auth/google/callback',
   app.use(errorRoutes);
 
 //{ force: true }
-sequelize.sync({ force: true }).then(result => {
+sequelize.sync().then(result => {
+  //Employer.create({ companyName: 'Test', email: 'test@test.com', password: 'test' });
   app.listen(process.env.PORT || 3000);
 });

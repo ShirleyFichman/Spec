@@ -1,7 +1,7 @@
 const Sequelize= require('sequelize'); 
 const sequelize= require('../util/database'); 
 
-const Position = sequelize.define('position', {
+const Job = sequelize.define('job', {
     id: {
         type: Sequelize.INTEGER,
         autoIncrement: true,
@@ -22,4 +22,4 @@ const Position = sequelize.define('position', {
     },
 });
 
-module.exports= Position;
+module.exports= Job;
