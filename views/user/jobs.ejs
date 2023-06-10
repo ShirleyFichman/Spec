@@ -5,5 +5,14 @@
 
     <main>
         <h1>jobs for user <%- userId %></h1>
+        <ul class="jobs">
+            <% for (var i = 0; i < jobs.length; i++) { %>
+            <li class="job-listed">
+                <div class="job-title">
+                    <span class="title" style="text-align:left"><%= jobs[i].title %></span>
+                </div>
+            </li>
+            <% } %>
+        </ul>
     </main>
 <%- include('../includes/end.ejs') %>
