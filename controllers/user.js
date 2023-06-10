@@ -1,6 +1,7 @@
 //TODO change id of profile to the real one instead of dummy
 const User = require('../models/user');
 const Profile = require('../models/profile');
+const Job = require('../models/job');
 /*
 const applyUserId = (req, res, next) => {
   const userId = req.params.userId;
@@ -19,11 +20,14 @@ exports.getHome= (req, res, next) =>{
 }
 
 exports.getJobs = (req, res, next) => {
+  Job.findAll().then(jobs => {
     res.render('user/jobs', {
       pageTitle: 'Jobs Page',
       path: '/jobs',
       userId: req.userId,
+      jobs: jobs,
     });
+  }).catch(err => console.log(err))
   };
 
 exports.getProfile = (req, res, next) => {
@@ -45,7 +49,6 @@ exports.getProfile = (req, res, next) => {
 
 
 exports.getEditProfile = (req, res, next) => {
-  console.log("in edit profile");
   const userId = 1;
   User.findByPk(userId).then(user=>{
     user.getProfile()
