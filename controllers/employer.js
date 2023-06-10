@@ -1,10 +1,20 @@
 //TODO change id of employer to the real one instead of dummy
+//TODO create the get post employer page
+
 const Employer = require("../models/employer");
 const Job = require("../models/job");
 
 exports.getHome = (req, res, next) => {
     res.render('employer/home', {
       pageTitle: 'Home Page',
+      path: '/',
+    });
+  };
+
+exports.getPostEmployer = (req, res, next) => {
+  console.log("in get post employer");
+    res.render('employer/home', {
+      pageTitle: 'Create New Employer',
       path: '/',
     });
   };

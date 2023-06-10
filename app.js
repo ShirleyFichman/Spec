@@ -17,6 +17,7 @@ const Employer= require('./models/employer');
 const Profile= require('./models/profile');
 const User_Profile= require('./models/user_profile');
 
+Employer.belongsTo(User, {constraints: true, onDelete: 'CASCADE'});
 Job.belongsTo(Employer, {constraints: true, onDelete: 'CASCADE'});
 User.hasOne(Profile, { through: User_Profile });
 Profile.belongsTo(User, { through: User_Profile, 
@@ -44,9 +45,6 @@ app.use(compression());
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, 'public'))); 
-
-app.use('/user', userRoutes);
-app.use('/employer', employerRoutes);
 
 app.use(session({
     resave: false,
@@ -94,15 +92,16 @@ app.get('/auth/google/callback',
           user[0].createProfile({userId: userId, fullName: userProfile.displayName});
         }
         req.user= userId;
-        res.redirect('/user/profile/'+userId);
+        res.redirect('/home/'+userId);
       }).catch(err => console.log(err));
   });
 
-  app.use(generalRoutes);
-  app.use(errorRoutes);
-
 //{ force: true }
 sequelize.sync().then(result => {
-  //Employer.create({ companyName: 'Test', email: 'test@test.com', password: 'test' });
   app.listen(process.env.PORT || 3000);
 });
+
+app.use('/user', userRoutes);
+app.use('/employer', employerRoutes);
+app.use(generalRoutes);
+app.use(errorRoutes);
