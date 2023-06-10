@@ -1,5 +1,3 @@
-//TODO email should be checked that is email + auth will be added
-
 const Sequelize= require('sequelize'); 
 const sequelize= require('../util/database'); 
 
@@ -17,6 +15,10 @@ const User = sequelize.define('user', {
     name: {
         type: Sequelize.STRING,
         allowNull: false
+    },
+    is_employer: {
+        type: Sequelize.BOOLEAN,
+        allowNull: true
     }
 });
 

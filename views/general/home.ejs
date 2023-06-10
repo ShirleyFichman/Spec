@@ -33,7 +33,14 @@
     </nav>
 
     <main>
-        <h1>Home Page</h1>
+        <h1>Welcome to spec! Please choose if you are an Employer or a User</h1>
+        <form action="/employer/get-post-employer/<%= userId %>" method="POST">
+            <button type="submit" class="btn">Employer</button>
+        </form>
+        <form action="/user/home/<%= userId %>" method="POST">
+            <button type="submit" class="btn">User</button>
+        </form>
+
 
     </main>
 <%- include('../includes/end.ejs') %>
