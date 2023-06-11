@@ -3,6 +3,7 @@
 
 const Employer = require("../models/employer");
 const Job = require("../models/job");
+const User = require("../models/user");
 
 exports.getHome = (req, res, next) => {
     res.render('employer/home', {
@@ -12,13 +13,30 @@ exports.getHome = (req, res, next) => {
   };
 
 exports.getPostEmployer = (req, res, next) => {
-  console.log("in get post employer");
-    res.render('employer/home', {
+  const userId=1;
+    res.render('employer/post-employer', {
       pageTitle: 'Create New Employer',
       path: '/',
+      userId: userId
     });
   };
-  
+
+exports.postEmployer = (req, res, next) => {
+    const userId=1;
+    const companyName = req.body.companyName;
+    const intro = req.body.intro;
+    User.findByPk(userId).then(user => {
+      user.isEmployer= true;
+      Employer.create({
+        companyName: companyName,
+        intro: intro,
+        userId: userId
+      }).then(employer =>{
+        res.redirect('/employer/home/'+employer.id);
+      }).catch(err => console.log(err))
+    }).catch(err => console.log(err))
+  }
+
 exports.getPostJob = (req, res, next) => {
     const employerId = 1;
     Employer.findByPk(employerId)
@@ -28,7 +46,7 @@ exports.getPostJob = (req, res, next) => {
         pageTitle: 'Create Job',
         path: '/jobs',
         employer: employer,
-        editing: true,
+        editing: true
       })
     }).catch(err => console.log(err))
   };

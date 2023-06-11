@@ -1,0 +1,20 @@
+<%- include('../includes/head.ejs') %>
+</head>
+<body>
+   <%- include('../includes/navigation.ejs') %>
+
+    <main>
+        <form class="job-form" action="/employer/post-employer/<%= userId %>" method="POST">
+            <div class="form-control">
+                <label for="companyName">Company Name</label>
+                <input type="text" name="companyName" id="companyName">
+            </div>
+            <div class="form-control">
+                <label for="intro">Tell About Your Company</label>
+                <textarea name="intro" id="intro" rows="5"></textarea>
+            </div>
+            <button class="btn" type="submit">Update</button>
+        </form>
+    </main>
+<%- include('../includes/end.ejs') %>
+

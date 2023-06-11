@@ -19,7 +19,7 @@ const Job = sequelize.define('job', {
     summary: {
         type: Sequelize.TEXT,
         allowNull: true
-    },
+    }
 });
 
 module.exports= Job;

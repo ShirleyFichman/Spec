@@ -10,16 +10,12 @@ const Employer = sequelize.define('employer', {
     },
     companyName: {
         type: Sequelize.STRING,
-        allowNull: false
+        allowNull: true
     },
-    email: {
-        type: Sequelize.STRING,
-        allowNull: false
-    },
-    password: {
-        type: Sequelize.STRING,
-        allowNull: false
-    },
+    intro: {
+        type: Sequelize.TEXT,
+        allowNull: true
+    }
 });
 
 module.exports= Employer;
