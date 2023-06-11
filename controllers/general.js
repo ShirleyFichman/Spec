@@ -1,4 +1,3 @@
-//TODO in home ask if the user is Employer or regular user
 //TODO remove dummy user
 
 const User = require('../models/user');
@@ -7,7 +6,7 @@ const Employer = require('../models/employer');
 exports.getHome=(req, res, next) => {
   const userId = 1;
   User.findByPk(userId).then(user=>{
-    if(user.is_employer == null)
+    if(user.isEmployer == null)
     {
       res.render('general/home', {
         pageTitle: 'Home Page',
@@ -15,7 +14,7 @@ exports.getHome=(req, res, next) => {
         userId: userId,
       });
     }
-    else if (user.is_employer)
+    else if (user.isEmployer)
     {
       Employer.findOne({where: {userId: userId}})
       .then(employer => {

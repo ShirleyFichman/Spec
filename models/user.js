@@ -16,7 +16,7 @@ const User = sequelize.define('user', {
         type: Sequelize.STRING,
         allowNull: false
     },
-    is_employer: {
+    isEmployer: {
         type: Sequelize.BOOLEAN,
         allowNull: true
     }
