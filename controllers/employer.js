@@ -25,8 +25,11 @@ exports.postEmployer = (req, res, next) => {
     const userId=1;
     const companyName = req.body.companyName;
     const intro = req.body.intro;
-    User.findByPk(userId).then(user => {
+    User.findByPk(userId)
+    .then(user => {
       user.isEmployer= true;
+      return user.save();
+    }).then(result =>{
       Employer.create({
         companyName: companyName,
         intro: intro,
@@ -35,6 +38,7 @@ exports.postEmployer = (req, res, next) => {
         res.redirect('/employer/home/'+employer.id);
       }).catch(err => console.log(err))
     }).catch(err => console.log(err))
+    .catch(err => console.log(err))
   }
 
 exports.getPostJob = (req, res, next) => {
