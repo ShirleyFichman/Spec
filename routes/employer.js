@@ -10,6 +10,7 @@ router.use('/post-job/:employerId', employerController.postJob);
 router.use('/get-post-employer/:userId', employerController.getPostEmployer);
 router.use('/post-employer/:userId', employerController.postEmployer);
 router.use('/jobs/:employerId', employerController.getJobs); 
+router.use('/company-page/:employerId', employerController.getCompanyPage);
 router.use('/home/:employerId', employerController.getHome); 
 
 module.exports = router;

@@ -1,15 +1,29 @@
 //TODO change id of employer to the real one instead of dummy
-//TODO create the get post employer page
 
 const Employer = require("../models/employer");
 const Job = require("../models/job");
 const User = require("../models/user");
 
 exports.getHome = (req, res, next) => {
+  const employerId= 1;
     res.render('employer/home', {
       pageTitle: 'Home Page',
       path: '/',
+      employerId: employerId
     });
+  };
+
+exports.getCompanyPage = (req, res, next) => {
+  const employerId= 1;
+  Employer.findByPk(employerId)
+    .then(employer => {
+      res.render('employer/company-page', {
+        pageTitle: 'Company Page',
+        path: '/company-page',
+        employerId: employerId, 
+        employer: employer
+    });
+    }).catch(err => console.log(err))
   };
 
 exports.getPostEmployer = (req, res, next) => {
@@ -17,7 +31,8 @@ exports.getPostEmployer = (req, res, next) => {
     res.render('employer/post-employer', {
       pageTitle: 'Create New Employer',
       path: '/',
-      userId: userId
+      userId: userId,
+      employerId: userId
     });
   };
 
@@ -25,8 +40,11 @@ exports.postEmployer = (req, res, next) => {
     const userId=1;
     const companyName = req.body.companyName;
     const intro = req.body.intro;
-    User.findByPk(userId).then(user => {
+    User.findByPk(userId)
+    .then(user => {
       user.isEmployer= true;
+      return user.save();
+    }).then(result =>{
       Employer.create({
         companyName: companyName,
         intro: intro,
@@ -35,6 +53,7 @@ exports.postEmployer = (req, res, next) => {
         res.redirect('/employer/home/'+employer.id);
       }).catch(err => console.log(err))
     }).catch(err => console.log(err))
+    .catch(err => console.log(err))
   }
 
 exports.getPostJob = (req, res, next) => {
@@ -45,6 +64,7 @@ exports.getPostJob = (req, res, next) => {
       {
         pageTitle: 'Create Job',
         path: '/jobs',
+        employerId: employerId,
         employer: employer,
         editing: true
       })
