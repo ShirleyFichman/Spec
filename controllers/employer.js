@@ -100,3 +100,48 @@ exports.getJobs = (req, res, next) => {
     .catch(err => console.log(err));
   };
   
+exports.getEditJob = (req, res, next) => {
+    const employerId = 1;
+    const jobId = req.params.jobId;
+    Job.findOne({where:{id: jobId}})
+    .then(job =>{
+      res.render('employer/edit-job', {
+        pageTitle: 'Edit Job',
+        path: '/jobs',
+        employerId: employerId,
+        job: job
+      });
+    })
+    .catch(err => console.log(err));
+  };
+
+exports.editJob = (req, res, next) => {
+    const employerId = 1;
+    const jobId = req.params.jobId;
+    const updatedTitle = req.body.title;
+    const updatedRequirements= req.body.requirements;
+    const updatedSummary = req.body.summary;
+    
+    Job.findByPk(jobId)
+      .then(job => {
+        job.title = updatedTitle;
+        job.requirements = updatedRequirements;
+        job.summary = updatedSummary;
+        return job.save();
+      })
+      .then(result => {
+        res.redirect('/employer/jobs/'+employerId);
+      })
+      .catch(err => console.log(err));
+  };
+
+exports.deleteJob = (req, res, next) => {
+    const employerId = 1;
+    const jobId = req.params.jobId;
+    Job.findByPk(jobId)
+      .then(job => {
+        job.destroy();
+        res.redirect('/employer/jobs/'+employerId);
+      })
+      .catch(err => console.log(err));
+  };

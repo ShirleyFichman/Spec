@@ -15,6 +15,12 @@
                 <div class="job-title">
                     <span class="title" style="text-align:left"><%= jobs[i].title %></span>
                 </div>
+                <form action="/employer/get-edit-job/<%= employerId %>/<%= jobs[i].id %>" method="POST">
+                    <button type="submit" class="btn">Edit Job</button>
+                </form>
+                <form action="/employer/delete-job/<%= employerId %>/<%= jobs[i].id %>" method="POST">
+                    <button type="submit" class="btn">Delete Job</button>
+                </form>
             </li>
             <% } %>
         </ul>

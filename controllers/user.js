@@ -74,7 +74,7 @@ exports.getEditProfile = (req, res, next) => {
     const updatedIntro = req.body.intro;
     Profile.findByPk(profileId)
       .then(profile => {
-        profile.fullNAme = updatedFullName;
+        profile.fullName = updatedFullName;
         profile.location = updatedLocation;
         profile.imageUrl = updatedImageUrl;
         profile.intro = updatedIntro;
