@@ -1,5 +1,4 @@
 //TODO change id of employer to the real one instead of dummy
-//TODO create the get post employer page
 
 const Employer = require("../models/employer");
 const Job = require("../models/job");
@@ -12,6 +11,19 @@ exports.getHome = (req, res, next) => {
       path: '/',
       employerId: employerId
     });
+  };
+
+exports.getCompanyPage = (req, res, next) => {
+  const employerId= 1;
+  Employer.findByPk(employerId)
+    .then(employer => {
+      res.render('employer/company-page', {
+        pageTitle: 'Company Page',
+        path: '/company-page',
+        employerId: employerId, 
+        employer: employer
+    });
+    }).catch(err => console.log(err))
   };
 
 exports.getPostEmployer = (req, res, next) => {
