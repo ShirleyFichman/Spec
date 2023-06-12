@@ -6,9 +6,11 @@ const Job = require("../models/job");
 const User = require("../models/user");
 
 exports.getHome = (req, res, next) => {
+  const employerId= 1;
     res.render('employer/home', {
       pageTitle: 'Home Page',
       path: '/',
+      employerId: employerId
     });
   };
 
@@ -17,7 +19,8 @@ exports.getPostEmployer = (req, res, next) => {
     res.render('employer/post-employer', {
       pageTitle: 'Create New Employer',
       path: '/',
-      userId: userId
+      userId: userId,
+      employerId: userId
     });
   };
 
@@ -49,6 +52,7 @@ exports.getPostJob = (req, res, next) => {
       {
         pageTitle: 'Create Job',
         path: '/jobs',
+        employerId: employerId,
         employer: employer,
         editing: true
       })
