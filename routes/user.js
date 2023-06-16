@@ -5,6 +5,7 @@ const userController = require('../controllers/user');
 
 const router = express.Router();
 
+router.use('/jobs/apply-for-job/:userId/:jobId', userController.postApply); 
 router.use('/jobs/:userId', userController.getJobs); 
 router.get('/get-edit-profile/:userId', userController.getEditProfile);
 router.post('/post-edit-profile/:userId', userController.postEditProfile);

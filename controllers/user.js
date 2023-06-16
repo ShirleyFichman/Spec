@@ -19,12 +19,29 @@ exports.getHome= (req, res, next) =>{
   });
 }
 
+exports.postApply = (req, res, next) => {
+  const jobId=1
+  const userId=1
+  //Sending cv for this job to the email of employer
+  //marking this job as already applied
+  Job.findOne({where:{id: jobId}})
+  .then(job =>{
+    res.render('user/successful-applied', {
+      pageTitle: 'Successful Applied',
+      path: '/jobs',
+      userId: userId,
+    });
+  })
+  .catch(err => console.log(err));
+  };
+
 exports.getJobs = (req, res, next) => {
+  const userId=1
   Job.findAll().then(jobs => {
     res.render('user/jobs', {
       pageTitle: 'Jobs Page',
       path: '/jobs',
-      userId: req.userId,
+      userId: userId,
       jobs: jobs,
     });
   }).catch(err => console.log(err))
@@ -38,6 +55,7 @@ exports.getProfile = (req, res, next) => {
       res.render('user/profile', {
         pageTitle: 'Profile Page',
         path: '/profile',
+        userId: req.params.userId,
         profile: profile,
         editing: false,
       });
@@ -56,6 +74,7 @@ exports.getEditProfile = (req, res, next) => {
       res.render('user/edit-profile', {
         pageTitle: 'Edit Profile Page',
         path: '/profile',
+        userId: req.params.userId,
         profile: profile,
         editing: true,
       });
@@ -64,7 +83,6 @@ exports.getEditProfile = (req, res, next) => {
   })
   .catch(err => console.log(err))
   };
-
 
   exports.postEditProfile= (req, res, next) => {
     const profileId = 1;
