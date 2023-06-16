@@ -9,8 +9,17 @@
             <% for (var i = 0; i < jobs.length; i++) { %>
             <li class="job-listed">
                 <div class="job-title">
-                    <span class="title" style="text-align:left"><%= jobs[i].title %></span>
+                    <span class="title" style="text-align:left"><b><%= jobs[i].title %></b></span>
                 </div>
+                <div class="job-requirements">
+                    <span class="title" style="text-align:left">Requirements:<br><%= jobs[i].requirements %></span>
+                </div>
+                <div class="job-summary">
+                    <span class="title" style="text-align:left"><%= jobs[i].summary %></span>
+                </div>
+                <form action="/user/jobs/apply-for-job/<%= userId %>/<%= jobs[i].id %>" method="POST">
+                    <button type="submit" class="btn">Apply</button>
+                </form>
             </li>
             <% } %>
         </ul>
