@@ -1,8 +1,21 @@
 //TODO change id of profile to the real one instead of dummy
+//TODO marking job as already applied
 const User = require('../models/user');
 const Profile = require('../models/profile');
 const Job = require('../models/job');
 const Resume = require('../models/resume');
+const config = require('../config.json');
+
+const nodemailer = require("nodemailer");
+const Employer = require('../models/employer');
+
+let transporter = nodemailer.createTransport({
+  service: "gmail",
+  auth: {
+    user: config.email,
+    pass: config.pass
+  },
+});
 /*
 const applyUserId = (req, res, next) => {
   const userId = req.params.userId;
@@ -23,15 +36,47 @@ exports.getHome= (req, res, next) =>{
 exports.postApply = (req, res, next) => {
   const jobId=1
   const userId=1
-  //Sending cv for this job to the email of employer
-  //marking this job as already applied
+
   Job.findOne({where:{id: jobId}})
   .then(job =>{
-    res.render('user/successful-applied', {
-      pageTitle: 'Successful Applied',
-      path: '/jobs',
-      userId: userId,
-    });
+    Employer.findByPk(job.employerId)
+    .then(employer => {
+      User.findByPk(employer.userId)
+      .then(userOfEmployer =>{
+        const employerEmail= userOfEmployer.email;
+        Profile.findOne({where: {userId: userId}})
+        .then(profile =>{
+          Resume.findOne({where: {profileId: profile.id}})
+          .then(resume =>{
+            if (resume != null)
+            {
+              transporter.sendMail({
+                from: "spec <"+config.email+">",
+                to: employerEmail, 
+                subject: "Application for <"+job.title+">", 
+                attachments:[{
+                  filename: resume.fileName,
+                  path: resume.filePath
+                }]
+              });
+              res.render('user/successful-applied', {
+                pageTitle: 'Successful Applied',
+                path: '/jobs',
+                userId: userId,
+              });
+            }
+            else
+            {
+              console.log("no resume");
+            }
+          })
+          .catch(err => console.log(err));
+        })
+        .catch(err => console.log(err));
+      })
+      .catch(err => console.log(err));
+    })
+    .catch(err => console.log(err));
   })
   .catch(err => console.log(err));
   };
