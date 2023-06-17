@@ -2,6 +2,7 @@
 const User = require('../models/user');
 const Profile = require('../models/profile');
 const Job = require('../models/job');
+const Resume = require('../models/resume');
 /*
 const applyUserId = (req, res, next) => {
   const userId = req.params.userId;
@@ -65,7 +66,6 @@ exports.getProfile = (req, res, next) => {
   .catch(err => console.log(err))
   };
 
-
 exports.getEditProfile = (req, res, next) => {
   const userId = 1;
   User.findByPk(userId).then(user=>{
@@ -99,9 +99,26 @@ exports.getEditProfile = (req, res, next) => {
         return profile.save();
       })
       .then(result => {
-        console.log('updated profile');
         res.redirect('/user/profile/'+profileId);
       })
       .catch(err => console.log(err));
-  }
-  
+  };
+
+  exports.postResume= (req, res, next) => {
+    const userId=1;
+    const profileId=1;
+    const { originalname, path, size } = req.file;
+
+    Profile.findByPk(profileId)
+    .then(profile => {
+      profile.createResume({
+        fileName: originalname,
+        filePath: path,
+        fileSize: size
+      })
+      .then(resume => {
+        res.redirect('/user/profile/'+userId);
+      })
+      .catch(err => console.log(err));
+    })
+  };

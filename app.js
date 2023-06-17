@@ -16,6 +16,7 @@ const Job= require('./models/job');
 const Employer= require('./models/employer');
 const Profile= require('./models/profile');
 const User_Profile= require('./models/user_profile');
+const Resume= require('./models/resume');
 
 Employer.belongsTo(User, {constraints: true, onDelete: 'CASCADE'});
 Job.belongsTo(Employer, {constraints: true, onDelete: 'CASCADE'});
@@ -25,6 +26,8 @@ Profile.belongsTo(User, { through: User_Profile,
   constraints: true,
   onDelete: 'CASCADE',
   onUpdate: 'CASCADE' });
+Resume.belongsTo(Profile, {constraints: true, onDelete: 'CASCADE'})
+Profile.hasOne(Resume, {constraints: true, onDelete: 'CASCADE'});
 
 const app= express();
 
