@@ -93,6 +93,20 @@ exports.getJobs = (req, res, next) => {
   }).catch(err => console.log(err))
   };
 
+  exports.getEmployerPage = (req, res, next) => {
+    const userId=1
+    const employerId = req.params.userId;
+    Employer.findByPk(employerId)
+    .then(employer => {
+      res.render('user/employer-page', {
+        pageTitle: 'Employer Page',
+        path: '/jobs',
+        userId: userId,
+        employer: employer,
+      });
+    }).catch(err => console.log(err))
+    };
+
 exports.getProfile = (req, res, next) => {
   const userId = 1;
   User.findByPk(userId).then(user=>{
