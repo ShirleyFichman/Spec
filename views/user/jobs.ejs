@@ -20,6 +20,9 @@
                 <form action="/user/jobs/apply-for-job/<%= userId %>/<%= jobs[i].id %>" method="POST">
                     <button type="submit" class="btn">Apply</button>
                 </form>
+                <form action="/user/employer-page/<%= userId %>/<%=  jobs[i].employerId %>" method="POST">
+                    <button type="submit" class="btn">Check Employer Page</button>
+                </form>
             </li>
             <% } %>
         </ul>
