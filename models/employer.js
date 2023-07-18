@@ -15,6 +15,10 @@ const Employer = sequelize.define('employer', {
     intro: {
         type: Sequelize.TEXT,
         allowNull: true
+    },
+    logoUrl:{
+        type: Sequelize.STRING,
+        allowNull: true
     }
 });
 
