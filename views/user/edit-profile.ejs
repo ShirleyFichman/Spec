@@ -4,7 +4,7 @@
    <%- include('../includes/user-navigation.ejs') %>
 
     <main>
-        <form class="profile-form" action="/user/post-edit-profile/<%= profile.id %>" method="POST">
+        <form class="profile-form" action="/user/post-edit-profile/<%= userId %>" method="POST">
             <div class="form-control">
                 <label for="imageUrl">Image URL</label>
                 <input type="text" name="imageUrl" id="imageUrl" value="<%= profile.imageUrl %>">

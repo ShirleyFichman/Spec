@@ -16,14 +16,6 @@ let transporter = nodemailer.createTransport({
     pass: config.pass
   },
 });
-/*
-const applyUserId = (req, res, next) => {
-  const userId = req.params.userId;
-  req.user = userId;
-  console.log("user id: ", req.user);
-  res.send();
-  };
-  */
 
 exports.getHome= (req, res, next) =>{
   res.render('user/home', {
@@ -34,8 +26,8 @@ exports.getHome= (req, res, next) =>{
 }
 
 exports.postApply = (req, res, next) => {
-  const jobId=1
-  const userId=1
+  const jobId = req.params.jobId;
+  const userId = req.params.userId;
 
   Job.findOne({where:{id: jobId}})
   .then(job =>{
@@ -82,7 +74,7 @@ exports.postApply = (req, res, next) => {
   };
 
 exports.getJobs = (req, res, next) => {
-  const userId=1
+  const userId = req.params.userId;
   Job.findAll().then(jobs => {
     res.render('user/jobs', {
       pageTitle: 'Jobs Page',
@@ -94,7 +86,7 @@ exports.getJobs = (req, res, next) => {
   };
 
   exports.getEmployerPage = (req, res, next) => {
-    const userId=1
+    const userId = req.params.userId;
     const employerId = req.params.employerId;
     Employer.findByPk(employerId)
     .then(employer => {
@@ -108,8 +100,9 @@ exports.getJobs = (req, res, next) => {
     };
 
 exports.getProfile = (req, res, next) => {
-  const userId = 1;
-  User.findByPk(userId).then(user=>{
+  const userId = req.params.userId;
+  User.findByPk(userId)
+  .then(user=>{
     user.getProfile()
     .then(profile =>{
       res.render('user/profile', {
@@ -126,14 +119,14 @@ exports.getProfile = (req, res, next) => {
   };
 
 exports.getEditProfile = (req, res, next) => {
-  const userId = 1;
+  const userId = req.params.userId;
   User.findByPk(userId).then(user=>{
     user.getProfile()
     .then(profile =>{
       res.render('user/edit-profile', {
         pageTitle: 'Edit Profile Page',
         path: '/profile',
-        userId: req.params.userId,
+        userId: userId,
         profile: profile,
         editing: true,
       });
@@ -144,33 +137,33 @@ exports.getEditProfile = (req, res, next) => {
   };
 
   exports.postEditProfile= (req, res, next) => {
-    const profileId = 1;
+    const userId = req.params.userId;
     const updatedFullName = req.body.fullName;
     const updatedLocation = req.body.location;
     const updatedImageUrl = req.body.imageUrl;
     const updatedIntro = req.body.intro;
-    Profile.findByPk(profileId)
-      .then(profile => {
-        profile.fullName = updatedFullName;
-        profile.location = updatedLocation;
-        profile.imageUrl = updatedImageUrl;
-        profile.intro = updatedIntro;
-        return profile.save();
-      })
-      .then(result => {
-        res.redirect('/user/profile/'+profileId);
-      })
-      .catch(err => console.log(err));
+    
+    Profile.findOne({where: {userId: userId}})
+    .then(profile => {
+      profile.fullName = updatedFullName;
+      profile.location = updatedLocation;
+      profile.imageUrl = updatedImageUrl;
+      profile.intro = updatedIntro;
+      return profile.save();
+    })
+    .then(result => {
+      res.redirect('/user/profile/'+userId);
+    })
+    .catch(err => console.log(err));
   };
 
   exports.postResume= (req, res, next) => {
-    const userId=1;
-    const profileId=1;
-    const { originalname, path, size } = req.file;
-
-    Profile.findByPk(profileId)
-    .then(profile => {
-      profile.createResume({
+    const userId = req.params.userId;
+    if  (req.file) {
+      const { originalname, path, size } = req.file;
+      Profile.findOne({where: {userId: userId}})
+      .then(profile => {
+        profile.createResume({
         fileName: originalname,
         filePath: path,
         fileSize: size
@@ -180,10 +173,14 @@ exports.getEditProfile = (req, res, next) => {
       })
       .catch(err => console.log(err));
     })
+    }
+    else {
+      res.redirect('/user/profile/'+userId);
+    }
   };
 
 exports.deleteAccount = (req, res, next) => {
-  const userId=1;
+  const userId = req.params.userId;
   User.findByPk(userId)
   .then(user => {
     console.log("in deleteAccount");
