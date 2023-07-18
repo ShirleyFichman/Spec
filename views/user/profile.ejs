@@ -7,7 +7,7 @@
         <div class="card__image">
             <img src="<%= profile.imageUrl %>" alt="profile_picture">
         </div>
-        <form action="/user/get-edit-profile/<%= profile.id %>" method="POST">
+        <form action="/user/get-edit-profile/<%= userId %>" method="POST">
             <button type="submit" class="btn">Edit Profile</button>
         </form>
         <h1>profile  id: <%- profile.id %></h1>
