@@ -95,7 +95,7 @@ exports.getJobs = (req, res, next) => {
 
   exports.getEmployerPage = (req, res, next) => {
     const userId=1
-    const employerId = req.params.userId;
+    const employerId = req.params.employerId;
     Employer.findByPk(employerId)
     .then(employer => {
       res.render('user/employer-page', {

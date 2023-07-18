@@ -8,5 +8,8 @@
         <h1>Company page</h1>
         <h2>Company Name: <%- employer.companyName %></h2>
         <h2>About: <%- employer.intro %></h2>
+        <form action="/employer/get-edit-company-page/<%= employerId %>/" method="POST">
+            <button type="submit" class="btn">Edit Details</button>
+        </form>
     </main>
 <%- include('../includes/end.ejs') %>

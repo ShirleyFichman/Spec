@@ -88,16 +88,21 @@ exports.postJob = (req, res, next) => {
   
 exports.getJobs = (req, res, next) => {
     const employerId = 1;
-    Job.findAll({where:{employerId: employerId}})
+    Employer.findByPk(employerId)
+    .then(employer => {
+      Job.findAll({where:{employerId: employerId}})
     .then(jobs =>{
       res.render('employer/jobs', {
         pageTitle: 'Jobs Page',
         path: '/jobs',
         employerId: employerId,
+        companyName: employer.companyName,
         jobs: jobs
       });
     })
     .catch(err => console.log(err));
+    })
+    
   };
   
 exports.getEditJob = (req, res, next) => {
@@ -145,3 +150,32 @@ exports.deleteJob = (req, res, next) => {
       })
       .catch(err => console.log(err));
   };
+
+exports.getEditCompany = (req, res, next) => {
+  const employerId = 1;
+  Employer.findByPk(employerId)
+  .then(employer => {
+    res.render('employer/edit-company-page', {
+      pageTitle: 'Edit Company Page',
+      path: '/company-page',
+      employerId: employerId, 
+      employer: employer
+  });
+  }).catch(err => console.log(err))
+};
+
+exports.editCompany = (req, res, next) => {
+  const employerId = 1;
+  const updatedName= req.body.companyName;
+  const updatedIntro= req.body.intro;
+  Employer.findByPk(employerId)
+  .then(employer => {
+    employer.companyName= updatedName;
+    employer.intro= updatedIntro;
+    return employer.save();
+  })
+  .then(result => {
+    res.redirect('/employer/company-page/'+employerId);
+  })
+  .catch(err => console.log(err));
+};
