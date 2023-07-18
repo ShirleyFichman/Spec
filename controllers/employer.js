@@ -40,6 +40,7 @@ exports.postEmployer = (req, res, next) => {
     const userId=1;
     const companyName = req.body.companyName;
     const intro = req.body.intro;
+    const logoUrl = req.body.logoUrl;
     User.findByPk(userId)
     .then(user => {
       user.isEmployer= true;
@@ -48,6 +49,7 @@ exports.postEmployer = (req, res, next) => {
       Employer.create({
         companyName: companyName,
         intro: intro,
+        logoUrl: logoUrl,
         userId: userId
       }).then(employer =>{
         res.redirect('/employer/home/'+employer.id);
@@ -168,10 +170,12 @@ exports.editCompany = (req, res, next) => {
   const employerId = 1;
   const updatedName= req.body.companyName;
   const updatedIntro= req.body.intro;
+  const updatedLogoUrl=  req.body.logoUrl;
   Employer.findByPk(employerId)
   .then(employer => {
     employer.companyName= updatedName;
     employer.intro= updatedIntro;
+    employer.logoUrl= updatedLogoUrl;
     return employer.save();
   })
   .then(result => {

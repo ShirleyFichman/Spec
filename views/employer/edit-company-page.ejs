@@ -6,6 +6,10 @@
     <main>
         <form class="company-form" action="/employer/edit-company/<%= employerId %>" method="POST">
             <div class="form-control">
+                <label for="logoUrl">Logo URL</label>
+                <input type="text" name="logoUrl" id="logoUrl" value="<%= employer.logoUrl %>">
+            </div>
+            <div class="form-control">
                 <label for="companyName">Company Name</label>
                 <input type="text" name="companyName" id="companyName" value="<%= employer.companyName %>">
             </div>
