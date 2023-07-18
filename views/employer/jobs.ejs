@@ -5,7 +5,7 @@
    <%- include('../includes/employer-navigation.ejs') %>
 
     <main>
-        <h1>Jobs page for Employer <%- employerId %></h1>
+        <h1>Jobs page for Employer <%- companyName %></h1>
         <form action="/employer/get-post-job/<%= employerId %>" method="POST">
             <button type="submit" class="btn">Add Job</button>
         </form>
