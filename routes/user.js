@@ -13,6 +13,7 @@ router.use('/jobs/:userId', userController.getJobs);
 router.get('/get-edit-profile/:userId', userController.getEditProfile);
 router.post('/post-edit-profile/:userId', userController.postEditProfile);
 router.post('/profile/upload-resume/:userId', upload.single('resume'), userController.postResume); 
+router.use('/delete-account/:userId', userController.deleteAccount);
 router.use('/profile/:userId', userController.getProfile); 
 router.get('/employer-page/:userId/:employerId', userController.getEmployerPage);
 router.get('/home/:userId', userController.getHome); 

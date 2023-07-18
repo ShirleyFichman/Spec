@@ -18,5 +18,8 @@
             <input type="file" name="resume">
             <button type="submit">Upload Resume</button>
         </form>
+        <form action="/user/delete-account/<%= userId %>" method="POST" enctype="multipart/form-data">
+            <button type="submit">Delete Account</button>
+        </form>
     </main>
 <%- include('../includes/end.ejs') %>

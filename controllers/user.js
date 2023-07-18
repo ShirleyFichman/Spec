@@ -181,3 +181,14 @@ exports.getEditProfile = (req, res, next) => {
       .catch(err => console.log(err));
     })
   };
+
+exports.deleteAccount = (req, res, next) => {
+  const userId=1;
+  User.findByPk(userId)
+  .then(user => {
+    console.log("in deleteAccount");
+    user.destroy();
+    res.redirect('/');
+  })
+  .catch(err => console.log(err));
+};
