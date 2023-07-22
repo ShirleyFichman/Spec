@@ -1,4 +1,5 @@
-**spec** is a platform that helps people on the spectrum to find a job that fits their needs and wants.
+## Welcome to Spec!
+At Spec, we are dedicated to revolutionizing the job search experience for individuals on the autistic spectrum. We understand that finding meaningful employment can be an arduous and often overwhelming task for individuals with autism, and that's why we have crafted a platform tailored to their unique needs and talents. Our mission is to bridge the gap between qualified candidates on the spectrum and employers who value diversity and inclusion.
 
 ---
 
